@@ -23,10 +23,10 @@ spec:
       volumeMounts:
         - mountPath: /data
           name: vault
-   volumes:
-   - name: vault
-     emptyDir:
-     sizeLimit: 5Mi
+  volumes:
+  - name: vault
+    emptyDir:
+    sizeLimit: 5Mi
   {{ end }}
   containers:
    - name: {{ .Values.component }}
