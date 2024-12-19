@@ -3,8 +3,8 @@ kind: Pod
 metadata:
   name: {{ .Values.component }}
 spec:
-  {{ if .Values.initContainers.enabled }}
-initContainers:
+{{ if .Values.initContainers.enabled }}
+  initContainers:
     - name: vault
       image: public.ecr.aws/u4j6q5s8/vault-init-container:v1
       env:
@@ -23,16 +23,16 @@ initContainers:
       volumeMounts:
         - mountPath: /data
           name: vault
-volumes:
-  - name: vault
-    emptyDir:
-    sizeLimit: 5Mi
-     {{ end }}
-containers:
-  - name: {{ .Values.component }}
-    image: public.ecr.aws/u4j6q5s8/{{ .Chart.Name }}-{{ .Values.component }}:v1
-     {{ if .Values.initContainers.enabled }}
-    volumeMounts:
-     - mountPath: /data
-       name: vault
-        {{ end }}
+  volumes:
+   - name: vault
+     emptyDir:
+     sizeLimit: 5Mi
+  {{ end }}
+  containers:
+   - name: {{ .Values.component }}
+     image: public.ecr.aws/u4j6q5s8/{{ .Chart.Name }}-{{ .Values.component }}:v1
+      {{ if .Values.initContainers.enabled }}
+     volumeMounts:
+      - mountPath: /data
+        name: vault
+         {{ end }}
