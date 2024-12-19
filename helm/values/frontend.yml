@@ -1,0 +1,5 @@
+component: frontend
+ports:
+  port: 80
+  protocol: TCP
+  targetPort: 80

@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Values.component }}
+spec:
+  initContainers:
+    - name: vault
+      image: public.ecr.aws/u4j6q5s8/vault-init-container:v1
+      env:
+        - name: VAULT_ADDR
+          value: "https://54.227.58.60:8200/"
+        - name: VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: vault-token
+              key: token
+              optional: true
+        - name: SECRET_NAME
+          value: common/{{ .Values.component }}
+        - name: VAULT_SKIP_VERIFY
+          value: "TRUE"
+          volumeMounts:
+            - mountPath: /data
+              name: vault
+  volumes:
+    - name: vault
+      emptyDir:
+        sizeLimit: 5Mi
+
+  containers:
+    - name: {{ .Values.component }}
+      image: public.ecr.aws/u4j6q5s8/{{ .Chart.Name }}-{{ .Values.component }}:v1
+      volumeMounts:
+        - mountPath: /data
+          name: vault
+
+
+
