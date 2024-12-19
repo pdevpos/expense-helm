@@ -6,7 +6,7 @@ spec:
 {{ if .Values.initContainers.enabled }}
   initContainers:
     - name: vault
-      image: public.ecr.aws/u4j6q5s8/vault-init-container:v1
+      image: pavanidevops78/kubernetes:l1
       env:
         - name: VAULT_ADDR
           value: "https://100.29.15.98:8200/"
@@ -30,7 +30,7 @@ spec:
   {{ end }}
   containers:
    - name: {{ .Values.component }}
-     image: public.ecr.aws/u4j6q5s8/{{ .Chart.Name }}-{{ .Values.component }}:v1
+     image: pavanidevops78/kubernetes:v2
       {{ if .Values.initContainers.enabled }}
      volumeMounts:
       - mountPath: /data
