@@ -23,7 +23,7 @@ spec:
       volumeMounts:
         - mountPath: /data
           name: vault
-  volumes:
+   volumes:
    - name: vault
      emptyDir:
      sizeLimit: 5Mi
