@@ -1,3 +1,5 @@
+initContainers:
+  enabled: false
 component: frontend
 ports:
   port: 80

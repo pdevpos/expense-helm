@@ -1,3 +1,5 @@
+initContainers:
+  enabled: true
 component: backend
 ports:
   port: 80
